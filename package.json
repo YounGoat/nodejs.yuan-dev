@@ -1,0 +1,26 @@
+{
+    "name": "yuan-dev",
+    "version": "0.0.1",
+    "description": "Run into DEV mode according to evn DEV",
+    "main": "index.js",
+    "scripts": {
+        "test": "DEV=A,B mocha"
+    },
+    "devDependencies": {
+        "mocha": "^3.2.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/YounGoat/nodejs.yuan-dev.git"
+    },
+    "keywords": [
+        "dev",
+        "debugger"
+    ],
+    "author": "youngoat@163.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/YounGoat/nodejs.yuan-dev/issues"
+    },
+    "homepage": "https://github.com/YounGoat/nodejs.yuan-dev#readme"
+}
