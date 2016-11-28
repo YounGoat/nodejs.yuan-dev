@@ -1,7 +1,7 @@
 {
     "name": "yuan-dev",
-    "version": "0.0.1",
-    "description": "Run into DEV mode according to evn DEV",
+    "version": "0.0.2",
+    "description": "Run into DEV mode according to DEV environment variable",
     "main": "index.js",
     "scripts": {
         "test": "DEV=A,B mocha"
