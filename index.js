@@ -11,9 +11,14 @@ var MODULE_REQUIRE
 	;
 
 var _parse_modes = function(modes) {
-	modes = modes.split(',');
-	for (var i = 0; i < modes.length; i++) {
-		modes[i] = modes[i].trim();
+	if (!modes) {
+		modes = [];
+	}
+	else {
+		modes = modes.split(',');
+		for (var i = 0; i < modes.length; i++) {
+			modes[i] = modes[i].trim();
+		}
 	}
 	return modes;
 };
