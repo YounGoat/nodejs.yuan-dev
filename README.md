@@ -2,7 +2,7 @@ See [CHANGE LOG](./CHANGELOG.md) for notable changes.
 
 #	Yuan-DEV
 
-*yuan-dev* makes it easy to return something different for debug.
+*yuan-dev* makes it easy to get or do something different for debug.
 
 ## Quick Start
 
