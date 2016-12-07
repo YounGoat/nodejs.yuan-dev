@@ -12,7 +12,7 @@ For example, normally we will start the http server listening to port 80, howeve
 // index.js
 
 const http = require('http');
-const dev = require('dev');
+const dev = require('yuan-dev');
 
 const server = http.createServer((req, res) => {
 	res.end('Hello Yuan DEV!');
