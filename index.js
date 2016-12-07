@@ -68,6 +68,13 @@ function dev() {
 		}
 	}
 
+	// (Action)
+	else if (arguments[0] instanceof Action) {
+		if (MODES.length > 0) {
+			value = arguments[0];
+		}
+	}
+
 	// (modeValues, default)
 	else if (typeof arguments[0] == 'object' && arguments.length < 3) {
 		value = arguments[1];
@@ -97,18 +104,38 @@ dev.action = function(fn) {
 	return new Action(fn);
 };
 
-dev.run = function() {
+dev.run = function FOO() {
+	var onDev = false, action;
 	if (typeof arguments[0] == 'string' && typeof arguments[1] == 'function') {
-		if (dev(arguments[0])) arguments[1]();
+		onDev = dev(arguments[0]);
+		action = arguments[1];
 	}
 
 	else if (typeof arguments[0] == 'function') {
-		if (dev()) arguments[0]();
+		onDev = dev();
+		action = arguments[0];
 	}
 
 	else {
 		throw new Error('Invalid dev.run() invoking.');
 	}
+
+	if (onDev) action();
+
+	var ret = {
+		elif: function() {
+			if (!onDev) return FOO.apply(null, arguments);
+			else return ret;
+		},
+
+		else: function(fn) {
+			if (!onDev) fn();
+		}
+	};
+
+	return ret;
 };
+
+dev.if = dev.run;
 
 module.exports = dev;

@@ -34,6 +34,20 @@ describe('Do something on DEV mode: dev( { mode: dev.action(fn) } )', function()
 		});
 		assert.equal('a', what);
 	});
+
+	it('Run under Dev mode', function() {
+		var what = 'normal';
+		dev(dev.action(function() { what = 'DEV'; }));
+		assert.equal('DEV', what);
+	});
+
+	it('fn in dev.action(fn) will not be invoked if not under right mode', function() {
+		var what;
+		dev({
+			'NULL': dev.action(function() { what = 'null'; })
+		});
+		assert.notEqual('null', what);
+	});
 });
 
 describe('Do something immediately: dev.run()', function() {
@@ -43,6 +57,21 @@ describe('Do something immediately: dev.run()', function() {
 
 	it('Run immediately under Dev mode', function(done) {
 		dev.run(done);
+	});
+});
+
+describe('dev.if(fn).else(fn)', function() {
+	it('Run under Dev mode A', function(done) {
+		dev.if('NULL', function() {
+			throw '.';
+		})
+		.elif('NULL', function() {
+			throw '..';
+		})
+		.elif('NULL', function() {
+			throw '...';
+		})
+		.else(done);
 	});
 });
 

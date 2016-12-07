@@ -1,6 +1,12 @@
+See [CHANGE LOG](./CHANGELOG.md) for notable changes.
+
 #	Yuan-DEV
 
-*yuan-dev* makes it easy to return something different for debug. For example, normally we will start the http server listening to port 80, however, we may want it listening to port 8080 instead when debugging:
+*yuan-dev* makes it easy to return something different for debug.
+
+## Quick Start
+
+For example, normally we will start the http server listening to port 80, however, we may want it listening to port 8080 instead when debugging:
 
 ```javascript
 // index.js
@@ -78,20 +84,54 @@ var port = dev({
 }, 80);
 ```
 
-```dev.action()``` will not do play outside of ```dev()```. However, another method is offered:
+```dev.action()``` will not do play outside of ```dev()```.
+
+However, another method is offered:
 
 ```javascript
+//  Run immediately on DEV mode.
 dev.run(() => {
 	console.log('We are under DEV mode now.');
 });
 
+// Equals to,
+if (dev()) {
+	console.log('We ares under DEV mode now.');
+}
+
+// Of course, we can do something ONLY on special DEV mode.
 dev.run('LOCAL', () => {
-	console.log('WE are under DEV mode (LOCAL) now.');
+	console.log('We are under DEV mode (LOCAL) now.');
 });
+
+// In more complex cases, we can use functions similiar to logic control statements.
+// if() ... elif()/elseif() ... else()
+dev
+	.if('LOCAL', () => {
+		console.log('We are under DEV mode (LOCAL) now.');
+	})
+	.elseif('FAT', () => {
+		console.log('We are under DEV mode (FAT) now.');
+	})
+	.else(() => {
+		console.log('We ares NOT under DEV mode (LOCAL) or DEV mode (FAT) now.');
+		console.log('ATTENTION: But maybe we are under some DEV mode other than LOCAL or FAT.');
+	});
+
+dev
+	.if(() => {
+		console.log('We are under DEV mode.');
+	})
+	.else(() => {
+		console.log('We are NOT under any DEV mode.');
+	})
 ```
+
+Not everybody like this syntax sugar, but I think it is more elegant using ```dev.if().else()``` than the general ```if ... else ...``` control statement.
 
 ##	more
 
+Run the next commands to install devDependencies and run *mocha* unit test:
 ```bash
 npm install
 npm test
